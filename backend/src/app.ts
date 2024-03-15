@@ -45,9 +45,16 @@ app.post('/clients', async (req, res) => {
     });
 });
 
-// app.get('/clients', async (req, res) => {
+app.get('/clients', async (_req, res) => {
+  const clients = await prisma.client.findMany();
 
-// });
+  res
+    .status(status.OK)
+    .json({
+      success: true,
+      data: clients
+    });
+});
 
 // app.patch('/clients/:id', async (req, res) => {
 
