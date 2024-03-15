@@ -4,9 +4,12 @@ import clientRoutes from './routes/client';
 import { errorMiddleware } from './middlewares/error';
 import { rateLimit } from 'express-rate-limit';
 import { rateLimitMiddleware } from './middlewares/rateLimit';
+import helmet from 'helmet';
 
 const app = express();
 app.use(express.json());
+
+app.use(helmet());
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
