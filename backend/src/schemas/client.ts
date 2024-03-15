@@ -42,3 +42,5 @@ export const createClientSchema = z.object({
   phoneNumber: phoneNumberSchema,
   status: statusSchema,
 });
+
+export const updateClientSchema = createClientSchema;

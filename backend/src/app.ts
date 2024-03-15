@@ -1,5 +1,5 @@
 import express from 'express';
-import { createClientSchema } from './schemas/client';
+import { createClientSchema, updateClientSchema } from './schemas/client';
 import prisma from './lib/prisma';
 import { status } from './constants/status/http';
 
@@ -11,7 +11,7 @@ app.post('/clients', async (req, res) => {
 
   if (!clientValidation.success) {
     return res
-      .status(status.UNPROCESSABLE_ENTITY)
+      .status(status.BAD_REQUEST)
       .json({
         success: false,
         message: clientValidation.error.issues[0].message,
@@ -56,9 +56,57 @@ app.get('/clients', async (_req, res) => {
     });
 });
 
-// app.patch('/clients/:id', async (req, res) => {
+app.put('/clients/:id', async (req, res) => {
+  const clientValidation = updateClientSchema.safeParse(req.body);
 
-// });
+  if (!clientValidation.success) {
+    return res
+      .status(status.BAD_REQUEST)
+      .json({
+        success: false,
+        message: clientValidation.error.issues[0].message,
+      });
+  }
+
+  const targetId = Number.parseInt(req.params.id);
+  if (Number.isNaN(targetId)) {
+    return res
+      .status(status.BAD_REQUEST)
+      .json({
+        success: false,
+        message: 'id de cliente inválido',
+      });
+  }
+
+  const clientsWithId = await prisma.client.count({
+    where: {
+      id: targetId,
+    },
+  });
+
+  if (clientsWithId === 0) {
+    return res
+      .status(status.NOT_FOUND)
+      .json({
+        success: false,
+        message: 'Não há clientes cadastrados com o id informado',
+      });
+  }
+
+  const updatedClient = await prisma.client.update({
+    where: {
+      id: targetId,
+    },
+    data: clientValidation.data,
+  });
+
+  return res
+    .status(status.OK)
+    .json({
+      success: true,
+      data: updatedClient,
+    });
+});
 
 // app.get('/clients/:id', async (req, res) => {
 
