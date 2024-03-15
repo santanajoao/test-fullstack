@@ -89,7 +89,7 @@ app.put('/clients/:id', async (req, res) => {
       .status(status.NOT_FOUND)
       .json({
         success: false,
-        message: 'Não há clientes cadastrados com o id informado',
+        message: 'Cliente com o id informado não encontrado',
       });
   }
 
@@ -108,8 +108,38 @@ app.put('/clients/:id', async (req, res) => {
     });
 });
 
-// app.get('/clients/:id', async (req, res) => {
+app.get('/clients/:id', async (req, res) => {
+  const targetId = Number.parseInt(req.params.id);
+  if (isNaN(targetId)) {
+    return res
+      .status(status.BAD_REQUEST)
+      .json({
+        success: false,
+        message: 'id de cliente inválido',
+      });
+  }
+  
+  const targetClient = await prisma.client.findUnique({
+    where: {
+      id: targetId,
+    },
+  });
 
-// });
+  if (!targetClient) {
+    return res
+      .status(status.NOT_FOUND)
+      .json({
+        success: false,
+        message: 'Cliente com o id informado não encontrado',
+      });
+  }
+
+  return res
+    .status(status.OK)
+    .json({
+      sucess: true,
+      data: targetClient,
+    });
+});
 
 export { app as default };
