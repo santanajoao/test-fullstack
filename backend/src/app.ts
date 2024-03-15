@@ -38,7 +38,7 @@ app.post('/clients', async (req, res) => {
   });
 
   res
-    .status(status.OK)
+    .status(status.CREATED)
     .json({
       success: true,
       data: newClient,
