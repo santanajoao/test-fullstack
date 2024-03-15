@@ -13,7 +13,7 @@ clientRoutes.post('/', async (req, res) => {
   });
 });
 
-clientRoutes.get('/', async (_req, res) => {
+clientRoutes.get('/', async (_req, res) => {  
   const { status, ...result } = await clientService.findAllClients();
 
   return res.status(status).json({
