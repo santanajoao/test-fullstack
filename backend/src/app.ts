@@ -74,7 +74,7 @@ app.put('/clients/:id', async (req, res) => {
       .status(status.BAD_REQUEST)
       .json({
         success: false,
-        message: 'id de cliente inválido',
+        message: 'Id de cliente inválido',
       });
   }
 
@@ -115,7 +115,7 @@ app.get('/clients/:id', async (req, res) => {
       .status(status.BAD_REQUEST)
       .json({
         success: false,
-        message: 'id de cliente inválido',
+        message: 'Id de cliente inválido',
       });
   }
   
