@@ -37,7 +37,7 @@ app.post('/clients', async (req, res) => {
     data: clientValidation.data,
   });
 
-  res
+  return res
     .status(status.CREATED)
     .json({
       success: true,
@@ -48,7 +48,7 @@ app.post('/clients', async (req, res) => {
 app.get('/clients', async (_req, res) => {
   const clients = await prisma.client.findMany();
 
-  res
+  return res
     .status(status.OK)
     .json({
       success: true,
@@ -137,7 +137,7 @@ app.get('/clients/:id', async (req, res) => {
   return res
     .status(status.OK)
     .json({
-      sucess: true,
+      success: true,
       data: targetClient,
     });
 });
