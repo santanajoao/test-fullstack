@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createClientSchema } from '../schemas/client';
+import { createClientSchema } from '../lib/schemas/client';
 
 export type CreateClient = z.infer<typeof createClientSchema>;
 

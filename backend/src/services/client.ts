@@ -1,7 +1,7 @@
 import { Client } from '@prisma/client';
 import { status } from '../constants/status/http';
 import prisma from '../lib/prisma';
-import { createClientSchema, updateClientSchema } from '../schemas/client';
+import { createClientSchema, updateClientSchema } from '../lib/schemas/client';
 import { CreateClient, UpdateClient } from '../types/client';
 import { ServiceResponse } from '../types/response';
 

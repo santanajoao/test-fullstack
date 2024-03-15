@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { cpf } from 'cpf-cnpj-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import { toOnlyDigits } from '../utils/string';
+import { toOnlyDigits } from '../../utils/string';
 
 export const emailSchema = z
   .string({
