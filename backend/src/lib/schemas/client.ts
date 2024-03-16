@@ -3,6 +3,13 @@ import { cpf } from 'cpf-cnpj-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { toOnlyDigits } from '../../utils/string';
 
+export const nameSchema = z
+  .string({
+    invalid_type_error: 'O nome deve ser uma string',
+    required_error: 'O campo name é obrigatório',
+  })
+  .min(3, 'O nome deve ter no mínimo 3 caracteres');
+
 export const emailSchema = z
   .string({
     invalid_type_error: 'O email deve ser uma string',
@@ -37,6 +44,7 @@ export const statusSchema = z
   .refine((status) => validStatus.includes(status), invalidStatusMessage);
 
 export const createClientSchema = z.object({
+  name: nameSchema,
   email: emailSchema,
   cpf: cpfSchema,
   phoneNumber: phoneNumberSchema,

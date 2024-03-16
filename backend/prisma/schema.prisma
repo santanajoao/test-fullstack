@@ -12,6 +12,7 @@ datasource db {
 
 model Client {
   id Int @id @default(autoincrement())
+  name String
   email String
   cpf String @unique
   phoneNumber String @map("phone_number")
