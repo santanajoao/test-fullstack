@@ -17,7 +17,7 @@ type Props = {
 export default function UpdateForm({ client }: Props) {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     setError,
     clearErrors,
@@ -40,6 +40,7 @@ export default function UpdateForm({ client }: Props) {
         <ClientForm.Field>
           <Input
             {...register('name')}
+            aria-label="Nome"
             placeholder="Nome"
             type="text"
           />
@@ -50,6 +51,7 @@ export default function UpdateForm({ client }: Props) {
         <ClientForm.Field>
           <Input
             {...register('email')}
+            aria-label="Email"
             placeholder="Email"
             type="email"
           />
@@ -60,6 +62,7 @@ export default function UpdateForm({ client }: Props) {
         <ClientForm.Field>
           <Input
             {...register('cpf')}
+            aria-label="CPF"
             placeholder="CPF"
             type="text"
           />
@@ -71,6 +74,7 @@ export default function UpdateForm({ client }: Props) {
           <Input
             {...register('phoneNumber')}
             placeholder="Telefone"
+            aria-label="Telefone"
             type="text"
           />
 
@@ -79,6 +83,7 @@ export default function UpdateForm({ client }: Props) {
 
         <ClientForm.Field>
           <ClientForm.StatusSelect
+            aria-label="Status"
             {...register('status')}
           />
 
@@ -89,7 +94,7 @@ export default function UpdateForm({ client }: Props) {
       </ClientForm.InputGroup>
 
       <ClientForm.ButtonsGroup className="mt-12">
-        <ButtonLike.Button disabled={!isValid} className="w-full">
+        <ButtonLike.Button className="w-full">
           Editar
         </ButtonLike.Button>
 

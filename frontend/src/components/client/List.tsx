@@ -30,7 +30,9 @@ export default async function ClientList() {
     <div>
       <ul className="space-y-8">
         {clientsResponse.data.map((client) => (
-          <ClientItem key={client.id} client={client} />
+          <li key={client.id}>
+            <ClientItem client={client} />
+          </li>
         ))}
       </ul>
 

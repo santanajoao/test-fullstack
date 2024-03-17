@@ -13,7 +13,7 @@ import { createClient } from '@/actions/client';
 export default function CreateForm() {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     handleSubmit,
     setError,
     clearErrors,
@@ -35,6 +35,7 @@ export default function CreateForm() {
         <ClientForm.Field>
           <Input
             {...register('name')}
+            aria-label="Nome"
             placeholder="Nome"
             type="text"
           />
@@ -45,6 +46,7 @@ export default function CreateForm() {
         <ClientForm.Field>
           <Input
             {...register('email')}
+            aria-label="Email"
             placeholder="Email"
             type="email"
           />
@@ -55,6 +57,7 @@ export default function CreateForm() {
         <ClientForm.Field>
           <Input
             {...register('cpf')}
+            aria-label="CPF"
             placeholder="CPF"
             type="text"
           />
@@ -65,6 +68,7 @@ export default function CreateForm() {
         <ClientForm.Field>
           <Input
             {...register('phoneNumber')}
+            aria-label="Telefone"
             placeholder="Telefone"
             type="text"
           />
@@ -74,6 +78,7 @@ export default function CreateForm() {
 
         <ClientForm.Field>
           <ClientForm.StatusSelect
+            aria-label="Status"
             {...register('status')}
           />
 
@@ -84,7 +89,7 @@ export default function CreateForm() {
       </ClientForm.InputGroup>
 
       <ClientForm.ButtonsGroup className="mt-12">
-        <ButtonLike.Button disabled={!isValid} className="w-full">
+        <ButtonLike.Button className="w-full">
           Criar
         </ButtonLike.Button>
 

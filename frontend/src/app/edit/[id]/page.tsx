@@ -2,6 +2,12 @@ import SectionHeading from '@/components/SectionHeading';
 import UpdateForm from '@/components/client/UpdateForm';
 import { getClientById } from '@/services/client';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Edição de clientes - UOL',
+};
+
 type Props = {
   params: {
     id: string;
