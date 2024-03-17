@@ -1,13 +1,18 @@
 import express from 'express';
 import 'express-async-errors';
-import clientRoutes from './routes/client';
+
 import { errorMiddleware } from './middlewares/error';
 import { rateLimit } from 'express-rate-limit';
 import { rateLimitMiddleware } from './middlewares/rateLimit';
+
+import clientRoutes from './routes/client';
 import helmet from 'helmet';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 app.use(helmet());
 

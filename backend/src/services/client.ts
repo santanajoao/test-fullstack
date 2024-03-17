@@ -64,17 +64,32 @@ export async function updateClient(id: number, data: UpdateClient): Promise<Serv
     };
   }
 
-  const clientsWithId = await prisma.client.count({
+  const clientsWithId = await prisma.client.findUnique({
     where: {
       id,
     },
   });
 
-  if (clientsWithId === 0) {
+  if (!clientsWithId) {
     return {
       status: status.NOT_FOUND,
       message: 'Cliente com o id informado não encontrado',
     };
+  }
+
+  if (clientsWithId.cpf !== clientValidation.data.cpf) {
+    const usersWithCpf = await prisma.client.count({
+      where: {
+        cpf: clientValidation.data.cpf,
+      },
+    });
+
+    if (usersWithCpf > 0) {
+      return {
+        status: status.CONFLICT,
+        message: 'O cpf informado já está cadastrado',
+      };
+    }
   }
 
   const updatedClient = await prisma.client.update({
