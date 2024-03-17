@@ -20,8 +20,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
 
-        <main className="pt-16 px-6 pb-12 max-w-6xl mx-auto">
-          <h1 className="text-2xl flex items-center font-medium text-[#333] border-b-2 border-b-[#f0f0f0] pb-6">
+        <main className="pt-10 px-6 pb-12 max-w-6xl mx-auto">
+          <h1 className="text-2xl flex items-center font-medium text-[#333] border-b-2 border-b-[#f0f0f0] py-6">
             <FiUser className="mr-4 text-3xl text-black" />
 
             Painel de clientes
