@@ -7,9 +7,8 @@ import ButtonLike from '../ButtonLike';
 import { useForm } from 'react-hook-form';
 import { CreateClient } from '@/types/client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { createClientSchema } from '@/lib/schemas/client';
-import { createClient } from '@/services/client';
+import { createClient } from '@/actions/client';
 
 export default function CreateForm() {
   const {
@@ -22,18 +21,12 @@ export default function CreateForm() {
     resolver: zodResolver(createClientSchema),
   });
 
-  const router = useRouter();
-
   async function onSubmit(data: CreateClient) {
     clearErrors('root');
 
-    const response = await createClient(data);
+    const result = await createClient(data);
 
-    if (response.success) {
-      return router.push('/');
-    }
-
-    setError('root', { message: response.message });
+    setError('root', { message: result?.message });
   }
   
   return (

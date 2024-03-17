@@ -1,24 +1,21 @@
 import { ApiResponse } from '@/types/api';
 import { Client, CreateClient, UpdateClient } from '@/types/client';
+import { treatApiFetch } from '@/utils/fetch';
 
 const domain = 'http://localhost:3006';
 
 export async function getAllClients(): Promise<ApiResponse<Client[]>> {
-  try {
+  return treatApiFetch(async () => {
     const response = await fetch(`${domain}/clients`, {
-      next: {
-        revalidate: 1,
-      },
+      cache: 'no-store'
     });
   
     return response.json();
-  } catch {
-    return { success: false, message: 'Algo deu errado' };
-  }
+  });
 }
 
 export async function createClient(data: CreateClient): Promise<ApiResponse<Client>> {
-  try {
+  return treatApiFetch(async () => {
     const response = await fetch(`${domain}/clients`, {
       method: 'POST',
       headers: {
@@ -28,13 +25,11 @@ export async function createClient(data: CreateClient): Promise<ApiResponse<Clie
     });
   
     return response.json();
-  } catch {
-    return { success: false, message: 'Algo deu errado' };
-  }
+  });
 }
 
 export async function updateClient(id: number, data: UpdateClient): Promise<ApiResponse<Client>> {
-  try {
+  return treatApiFetch(async () => {
     const response = await fetch(`${domain}/clients/${id}`, {
       method: 'PUT',
       headers: {
@@ -44,21 +39,15 @@ export async function updateClient(id: number, data: UpdateClient): Promise<ApiR
     });
   
     return response.json();
-  } catch {
-    return { success: false, message: 'Algo deu errado' };
-  }
+  });
 }
 
 export async function getClientById(id: number | string): Promise<ApiResponse<Client>> {
-  try {
+  return treatApiFetch(async () => {
     const response = await fetch(`${domain}/clients/${id}`, {
-      next: {
-        revalidate: 1,
-      },
+      cache: 'no-store',
     });
   
     return response.json();
-  } catch {
-    return { success: false, message: 'Algo deu errado' };
-  }
+  });
 }
