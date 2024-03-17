@@ -1,5 +1,5 @@
 import ButtonLike from '@/components/ButtonLike';
-import ClientList from '@/components/ClientList';
+import ClientList from '@/components/client/List';
 import SectionHeading from '@/components/SectionHeading';
 import { Metadata } from 'next';
 

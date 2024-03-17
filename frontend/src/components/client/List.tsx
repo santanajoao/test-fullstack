@@ -1,5 +1,5 @@
 import { getAllClients } from '@/services/client';
-import ClientItem from './ClientItem';
+import ClientItem from './Item';
 
 export default async function ClientList() {
   const clientsResponse = await getAllClients();

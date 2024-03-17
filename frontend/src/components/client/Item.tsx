@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonLike from './ButtonLike';
+import ButtonLike from '../ButtonLike';
 import { statusText } from '@/constants/client';
 import { cn } from '@/lib/tailwind';
 import { parsePhoneNumber } from 'libphonenumber-js';
