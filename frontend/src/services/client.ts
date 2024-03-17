@@ -33,7 +33,7 @@ export async function createClient(data: CreateClient): Promise<ApiResponse<Clie
   }
 }
 
-export async function updateClient(id: string, data: UpdateClient): Promise<ApiResponse<Client>> {
+export async function updateClient(id: number, data: UpdateClient): Promise<ApiResponse<Client>> {
   try {
     const response = await fetch(`${domain}/clients/${id}`, {
       method: 'PUT',
@@ -41,6 +41,20 @@ export async function updateClient(id: string, data: UpdateClient): Promise<ApiR
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
+    });
+  
+    return response.json();
+  } catch {
+    return { success: false, message: 'Algo deu errado' };
+  }
+}
+
+export async function getClientById(id: number | string): Promise<ApiResponse<Client>> {
+  try {
+    const response = await fetch(`${domain}/clients/${id}`, {
+      next: {
+        revalidate: 1,
+      },
     });
   
     return response.json();
