@@ -6,17 +6,23 @@ export default async function ClientList() {
 
   if (!clientsResponse.success) {
     return (
-      <div className="mt-12">
-        <h2 className="text-[#333333] text-center flex flex-col">
-          <span className="font-semibold text-2xl">
-            Ops! Algo deu errado.
-          </span>
+      <p className="text-[#333333] text-center flex flex-col py-7">
+        <span className="font-medium text-xl">
+          Ops! Algo deu errado.
+        </span>
           
-          <span className="font-medium">
-            Recarregue a página para tentar novamente
-          </span>
-        </h2>
-      </div>
+        <span>
+          Recarregue a página para tentar novamente
+        </span>
+      </p>
+    );
+  }
+
+  if (clientsResponse.data.length === 0) {
+    return (
+      <p className="text-[#333333] text-center py-7">
+        Nenhum cliente cadastrado
+      </p>
     );
   }
 
