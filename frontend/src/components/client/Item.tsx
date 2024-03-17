@@ -4,7 +4,7 @@ import { statusText } from '@/constants/client';
 import { cn } from '@/lib/tailwind';
 import { parsePhoneNumber } from 'libphonenumber-js';
 import { cpf } from 'cpf-cnpj-validator';
-import { Client } from '@/types/api';
+import { Client } from '@/types/client';
 
 type Props = {
   client: Client;

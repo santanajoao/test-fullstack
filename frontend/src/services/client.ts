@@ -1,4 +1,5 @@
-import { ApiResponse, Client } from '@/types/api';
+import { ApiResponse } from '@/types/api';
+import { Client } from '@/types/client';
 
 const domain = 'http://localhost:3006';
 

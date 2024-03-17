@@ -1,4 +1,5 @@
 import ButtonLike from '@/components/ButtonLike';
+import Input from '@/components/Input';
 import SectionHeading from '@/components/SectionHeading';
 import ClientForm from '@/components/client/Form';
 
@@ -11,9 +12,19 @@ export default function EditClientPage() {
       />
 
       <ClientForm.Form className="mt-3">
-        <ClientForm.Inputs />
+        <ClientForm.InputGroup>
+          <Input placeholder="Name" type="text" />
 
-        <ClientForm.ButtonsContainer className="mt-12">
+          <Input placeholder="Email" type="email" />
+
+          <Input placeholder="CPF" type="text" />
+
+          <Input placeholder="Telefone" type="text" />
+
+          <ClientForm.StatusSelect />
+        </ClientForm.InputGroup>
+
+        <ClientForm.ButtonsGroup className="mt-12">
           <ButtonLike.Button className="w-full">
             Editar
           </ButtonLike.Button>
@@ -21,7 +32,7 @@ export default function EditClientPage() {
           <ButtonLike.Ancor className="w-full" variant='outline' href="/">
             Voltar
           </ButtonLike.Ancor>
-        </ClientForm.ButtonsContainer>
+        </ClientForm.ButtonsGroup>
       </ClientForm.Form>
     </div>
   );

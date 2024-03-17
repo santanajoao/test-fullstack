@@ -9,12 +9,3 @@ export type ErrorApiResponse = {
 };
 
 export type ApiResponse<T> = SuccessApiResponse<T> | ErrorApiResponse;
-
-export type Client = {
-  id: number;
-  name: string;
-  email: string;
-  cpf: string;
-  phoneNumber: string;
-  status: 'active' | 'inactive' | 'waiting' | 'disabled';
-};

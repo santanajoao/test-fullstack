@@ -1,4 +1,4 @@
-import { Client } from '@/types/api';
+import { Client } from '@/types/client';
 
 export const statusText: Record<Client['status'], string> = {
   active: 'Ativo',
