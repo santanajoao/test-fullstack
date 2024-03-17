@@ -14,7 +14,7 @@ const styles = ({ size, variant }: ButtonLikeProps) => cn(
     'text-sm': size === 'small',
   },
   {
-    'bg-[#e29836] text-white font-medium': variant === 'fill',
+    'bg-[#e29836] text-white font-medium disabled:grayscale': variant === 'fill',
     'border border-[#e29836] text-[#e29836] hover:text-white hover:bg-[#e29836] hover:font-medium transition-colors': variant === 'outline',
   },
 );

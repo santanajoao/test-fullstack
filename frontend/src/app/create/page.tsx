@@ -6,17 +6,32 @@ import Input from '@/components/Input';
 import SectionHeading from '@/components/SectionHeading';
 import ClientForm from '@/components/client/Form';
 import { createClientSchema } from '@/lib/schemas/client';
+import { createClient } from '@/services/client';
 import { CreateClient } from '@/types/client';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 export default function CreateClientPage() {
-  const { register, formState: { errors }, handleSubmit } = useForm<CreateClient>({
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    setError,
+  } = useForm<CreateClient>({
     resolver: zodResolver(createClientSchema),
   });
 
-  function onSubmit(data: CreateClient) {
-    console.log(data);
+  const router = useRouter();
+
+  async function onSubmit(data: CreateClient) {
+    const response = await createClient(data);
+
+    if (response.success) {
+      return router.push('/');
+    }
+
+    setError('root', { message: response.message });
   }
 
   return (
@@ -75,10 +90,12 @@ export default function CreateClientPage() {
 
             <ErrorMessage>{errors.status?.message}</ErrorMessage>
           </ClientForm.Field>
+
+          <ErrorMessage>{errors.root?.message}</ErrorMessage>
         </ClientForm.InputGroup>
 
         <ClientForm.ButtonsGroup className="mt-12">
-          <ButtonLike.Button className="w-full">
+          <ButtonLike.Button disabled={!isValid} className="w-full">
             Criar
           </ButtonLike.Button>
 
