@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { cpf } from 'cpf-cnpj-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { toOnlyDigits } from '../../utils/string';
+import { addExtraNineOnPhone } from '../../utils/phone';
 
 const nameMinLength = 2;
 
@@ -33,6 +34,7 @@ export const phoneNumberSchema = z
     required_error: 'O campo phoneNumber é obrigatório',
   })
   .refine((phoneNumber) => isValidPhoneNumber(phoneNumber, 'BR'), 'Informe um número de telefone válido')
+  .transform(addExtraNineOnPhone)
   .transform(toOnlyDigits);
 
 const validStatus = ['active', 'inactive', 'waiting', 'disabled'];

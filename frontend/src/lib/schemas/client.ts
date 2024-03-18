@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { cpf } from 'cpf-cnpj-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import { addExtraNineOnPhone } from '@/utils/phone';
 
 export const nameSchema = z
   .string({
@@ -31,7 +30,6 @@ export const phoneNumberSchema = z
   })
   .min(10, 'O telefone deve ter no mínimo 10 dígitos. Não esqueça o DDD')
   .max(11, 'O telefone deve ter no máximo 11 dígitos')
-  .transform(addExtraNineOnPhone)
   .refine((phoneNumber) => isValidPhoneNumber(phoneNumber, 'BR'), 'Informe um número de telefone válido');
 
 const validStatus = ['active', 'inactive', 'waiting', 'disabled'];
