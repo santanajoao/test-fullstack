@@ -4,30 +4,19 @@ import * as clientService from '../../src/services/client';
 import { CreateClient } from '../../src/types/client';
 import { status } from '../../src/constants/status/http';
 import { SuccessServiceResponse } from '../../src/types/response';
+import { createClientData, validClient } from '../mocks/clients';
 
 describe('createClient service', () => {
-  const createClientData: CreateClient = {
-    cpf: '92607579082',
-    email: 'teste@gmail.com',
-    name: 'Teste',
-    phoneNumber: '77999999999',
-    status: 'waiting',
-  };
-
-  const createdClient: Client = {
-    id: 1,
-    ...createClientData,
-  };
 
   describe('business logic', () => {
     test('returns created client and right status', async () => {
     
       jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-      jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+      jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
       const result = await clientService.createClient(createClientData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.CREATED);
-      expect(result.data).toEqual(createdClient);
+      expect(result.data).toEqual(validClient);
     });
     
     test('responds with error if the cpf already exists', async () => {
@@ -47,11 +36,11 @@ describe('createClient service', () => {
       };
 
       jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-      jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+      jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
       const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.CREATED);
-      expect(result.data).toEqual(createdClient);
+      expect(result.data).toEqual(validClient);
     });
 
     test('returns with error if the cpf is invalid', async () => {
@@ -73,11 +62,11 @@ describe('createClient service', () => {
         };
   
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
   
         const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(createdClient);
+        expect(result.data).toEqual(validClient);
       });
 
       test('2', async () => {
@@ -87,11 +76,11 @@ describe('createClient service', () => {
         };
   
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
   
         const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(createdClient);
+        expect(result.data).toEqual(validClient);
       });
     });
 
@@ -125,11 +114,11 @@ describe('createClient service', () => {
         };
           
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(createdClient);
+        expect(result.data).toEqual(validClient);
       });
 
       test('active', async () => {
@@ -139,11 +128,11 @@ describe('createClient service', () => {
         };
           
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(createdClient);
+        expect(result.data).toEqual(validClient);
       });
 
       test('inactive', async () => {
@@ -153,11 +142,11 @@ describe('createClient service', () => {
         };
           
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(createdClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(createdClient);
+        expect(result.data).toEqual(validClient);
       });
     });
 

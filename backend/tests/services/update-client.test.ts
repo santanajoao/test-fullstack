@@ -4,45 +4,33 @@ import * as clientService from '../../src/services/client';
 import { CreateClient, UpdateClient } from '../../src/types/client';
 import { status } from '../../src/constants/status/http';
 import { SuccessServiceResponse } from '../../src/types/response';
+import { updateClientData, validClient } from '../mocks/clients';
 
 describe('updateClient service', () => {
-  const updateClientData: CreateClient = {
-    cpf: '92607579082',
-    email: 'teste@gmail.com',
-    name: 'Teste',
-    phoneNumber: '77999999999',
-    status: 'waiting',
-  };
-
-  const updatedClient: Client = {
-    id: 40028922,
-    ...updateClientData,
-  };
-
   describe('business logic', () => {
     test('returns updated client and right status', async () => {
-      jest.spyOn(prisma.client, 'findUnique').mockResolvedValue(updatedClient);
+      jest.spyOn(prisma.client, 'findUnique').mockResolvedValue(validClient);
       jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-      jest.spyOn(prisma.client, 'update').mockResolvedValue(updatedClient);
+      jest.spyOn(prisma.client, 'update').mockResolvedValue(validClient);
     
       const result = await clientService
-        .updateClient(updatedClient.id, updateClientData) as SuccessServiceResponse<Client>;
+        .updateClient(validClient.id, updateClientData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.OK);
-      expect(result.data).toEqual(updatedClient);
+      expect(result.data).toEqual(validClient);
     });
 
     test('returns with error if updated id doesnt exist', async () => {
       jest.spyOn(prisma.client, 'findUnique').mockResolvedValue(null);
 
       const result = await clientService
-        .updateClient(updatedClient.id, updateClientData);
+        .updateClient(validClient.id, updateClientData);
       expect(result.status).toBe(status.NOT_FOUND);
       expect(result).toHaveProperty('message');
     });
 
     test('return with error if tried to update the cpf for a existing one', async () => {
       const clientWithDifferentCpf = {
-        ...updatedClient,
+        ...validClient,
         cpf: '754.036.490-42',
       };
 
@@ -50,7 +38,7 @@ describe('updateClient service', () => {
       jest.spyOn(prisma.client, 'count').mockResolvedValue(1);
 
       const result = await clientService
-        .updateClient(updatedClient.id, updateClientData);
+        .updateClient(validClient.id, updateClientData);
       expect(result.status).toBe(status.CONFLICT);
       expect(result).toHaveProperty('message');
     });
@@ -67,12 +55,12 @@ describe('updateClient service', () => {
     });
 
     test('returns with error if the cpf is invalid', async () => {
-      const invalidUpdateClientData: CreateClient = {
+      const invalidUpdateClientDataupdateClientData: CreateClient = {
         ...updateClientData,
         cpf: '123.456.789-00',
       };
 
-      const result = await clientService.createClient(invalidUpdateClientData);
+      const result = await clientService.createClient(invalidUpdateClientDataupdateClientData);
       expect(result.status).toBe(status.BAD_REQUEST);
       expect(result).toHaveProperty('message');
     });
@@ -83,7 +71,7 @@ describe('updateClient service', () => {
         name: 'A',
       };
 
-      const result = await clientService.updateClient(updatedClient.id, invalidNameData);
+      const result = await clientService.updateClient(validClient.id, invalidNameData);
       expect(result.status).toBe(status.BAD_REQUEST);
       expect(result).toHaveProperty('message');
     });
@@ -94,7 +82,7 @@ describe('updateClient service', () => {
         email: 'invalid email',
       };
 
-      const result = await clientService.updateClient(updatedClient.id, invalidEmailData);
+      const result = await clientService.updateClient(validClient.id, invalidEmailData);
       expect(result.status).toBe(status.BAD_REQUEST);
       expect(result).toHaveProperty('message');
     });
@@ -105,7 +93,7 @@ describe('updateClient service', () => {
         status: 'banana',
       };
   
-      const result = await clientService.updateClient(updatedClient.id, invalidStatusData);
+      const result = await clientService.updateClient(validClient.id, invalidStatusData);
       expect(result.status).toBe(status.BAD_REQUEST);
       expect(result).toHaveProperty('message');
     });
@@ -118,11 +106,11 @@ describe('updateClient service', () => {
         };
           
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(updatedClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(updatedClient);
+        expect(result.data).toEqual(validClient);
       });
 
       test('active', async () => {
@@ -132,11 +120,11 @@ describe('updateClient service', () => {
         };
 
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(updatedClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(updatedClient);
+        expect(result.data).toEqual(validClient);
       });
 
       test('inactive', async () => {
@@ -146,11 +134,11 @@ describe('updateClient service', () => {
         };
           
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
-        jest.spyOn(prisma.client, 'create').mockResolvedValue(updatedClient);
+        jest.spyOn(prisma.client, 'create').mockResolvedValue(validClient);
     
         const result = await clientService.createClient(validStatusData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toEqual(updatedClient);
+        expect(result.data).toEqual(validClient);
       });
     });
   });
