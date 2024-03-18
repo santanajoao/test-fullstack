@@ -1,44 +1,48 @@
 import { Router } from 'express';
 import * as clientService from '../services/client';
-import { isSuccessStatus } from '../utils/http';
+import { isSuccessResponse } from '../utils/http';
 
 const clientRoutes = Router();
 
 clientRoutes.post('/', async (req, res) => {
-  const { status, ...result } = await clientService.createClient(req.body);
+  const response = await clientService.createClient(req.body);
+  const { status, ...rest } = response;
 
   return res.status(status).json({
-    success: isSuccessStatus(status),
-    ...result,
+    success: isSuccessResponse(response),
+    ...rest,
   });
 });
 
 clientRoutes.get('/', async (_req, res) => {  
-  const { status, ...result } = await clientService.findAllClients();
+  const response = await clientService.findAllClients();
+  const { status, ...rest } = response;
 
   return res.status(status).json({
-    success: isSuccessStatus(status),
-    ...result
+    success: isSuccessResponse(response),
+    ...rest,
   });
 });
 
 clientRoutes.put('/:id', async (req, res) => {
   const targetId = Number.parseInt(req.params.id);
-  const { status, ...result } = await clientService.updateClient(targetId, req.body);
+  const response = await clientService.updateClient(targetId, req.body);
+  const { status, ...rest } = response;
 
   return res.status(status).json({
-    success: isSuccessStatus(status),
-    ...result,
+    success: isSuccessResponse(response),
+    ...rest,
   });
 });
 
 clientRoutes.get('/:id', async (req, res) => {
   const targetId = Number.parseInt(req.params.id);
-  const { status, ...result } = await clientService.getClientById(targetId);
+  const response = await clientService.getClientById(targetId);
+  const { status, ...rest } = response;
 
   return res.status(status).json({
-    success: isSuccessStatus(status),
-    ...result,
+    success: isSuccessResponse(response),
+    ...rest,
   });
 });
 

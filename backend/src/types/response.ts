@@ -1,11 +1,11 @@
 import { ErrorStatusCode, SuccessStatusCode } from './http';
 
-type SuccessServiceResponse<T> = {
+export type SuccessServiceResponse<T> = {
   status: SuccessStatusCode;
   data: T;
 }
 
-type ErrorServiceResponse = {
+export type ErrorServiceResponse = {
   status: ErrorStatusCode
   message: string;
 }

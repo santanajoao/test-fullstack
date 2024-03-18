@@ -3,12 +3,14 @@ import { cpf } from 'cpf-cnpj-validator';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { toOnlyDigits } from '../../utils/string';
 
+const nameMinLength = 2;
+
 export const nameSchema = z
   .string({
     invalid_type_error: 'O nome deve ser uma string',
     required_error: 'O campo name é obrigatório',
   })
-  .min(3, 'O nome deve ter no mínimo 3 caracteres');
+  .min(nameMinLength, `O nome deve ter no mínimo ${nameMinLength} caracteres`);
 
 export const emailSchema = z
   .string({
