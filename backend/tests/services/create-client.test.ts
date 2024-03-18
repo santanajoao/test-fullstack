@@ -1,9 +1,9 @@
 import { Client } from '@prisma/client';
-import prisma from '../src/lib/prisma';
-import * as clientService from '../src/services/client';
-import { CreateClient } from '../src/types/client';
-import { status } from '../src/constants/status/http';
-import { SuccessServiceResponse } from '../src/types/response';
+import prisma from '../../src/lib/prisma';
+import * as clientService from '../../src/services/client';
+import { CreateClient } from '../../src/types/client';
+import { status } from '../../src/constants/status/http';
+import { SuccessServiceResponse } from '../../src/types/response';
 
 describe('createClient service', () => {
   const createClientData: CreateClient = {
@@ -27,7 +27,7 @@ describe('createClient service', () => {
     
       const result = await clientService.createClient(createClientData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.CREATED);
-      expect(result.data).toBe(createdClient);
+      expect(result.data).toEqual(createdClient);
     });
     
     test('responds with error if the cpf already exists', async () => {
@@ -51,7 +51,7 @@ describe('createClient service', () => {
     
       const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.CREATED);
-      expect(result.data).toBe(createdClient);
+      expect(result.data).toEqual(createdClient);
     });
 
     test('returns with error if the cpf is invalid', async () => {
@@ -77,7 +77,7 @@ describe('createClient service', () => {
   
         const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toBe(createdClient);
+        expect(result.data).toEqual(createdClient);
       });
 
       test('2', async () => {
@@ -91,7 +91,7 @@ describe('createClient service', () => {
   
         const result = await clientService.createClient(pontuationCpfData) as SuccessServiceResponse<Client>;
         expect(result.status).toBe(status.CREATED);
-        expect(result.data).toBe(createdClient);
+        expect(result.data).toEqual(createdClient);
       });
     });
 

@@ -1,9 +1,9 @@
 import { Client } from '@prisma/client';
-import prisma from '../src/lib/prisma';
-import * as clientService from '../src/services/client';
-import { CreateClient, UpdateClient } from '../src/types/client';
-import { status } from '../src/constants/status/http';
-import { SuccessServiceResponse } from '../src/types/response';
+import prisma from '../../src/lib/prisma';
+import * as clientService from '../../src/services/client';
+import { CreateClient, UpdateClient } from '../../src/types/client';
+import { status } from '../../src/constants/status/http';
+import { SuccessServiceResponse } from '../../src/types/response';
 
 describe('updateClient service', () => {
   const updateClientData: CreateClient = {
@@ -28,7 +28,7 @@ describe('updateClient service', () => {
       const result = await clientService
         .updateClient(updatedClient.id, updateClientData) as SuccessServiceResponse<Client>;
       expect(result.status).toBe(status.OK);
-      expect(result.data).toBe(updatedClient);
+      expect(result.data).toEqual(updatedClient);
     });
 
     test('returns with error if updated id doesnt exist', async () => {
@@ -130,7 +130,7 @@ describe('updateClient service', () => {
           ...updateClientData,
           status: 'active',
         };
-          
+
         jest.spyOn(prisma.client, 'count').mockResolvedValue(0);
         jest.spyOn(prisma.client, 'create').mockResolvedValue(updatedClient);
     
