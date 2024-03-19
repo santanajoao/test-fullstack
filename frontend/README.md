@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend - Gerenciador de clientes - Teste Fullstack UOL
 
-## Getting Started
+Este projeto é o frontend de um gerenciador de clientes para o teste Fullstack da UOL.
 
-First, run the development server:
+## Tecnologias utilizadas
+
+- **Typescript**
+- **Next**: Framework Web
+- **Zod**: Biblioteca para validação de dados.
+- **React Hook Form**: Biblioteca de validação de formulários
+- **Tailwind**: Biblioteca CSS
+
+## Rotas
+
+### /
+
+Exibe a listagem de clientes e link para as páginas de edição e registro de clientes
+
+### /clients/create
+
+Permite o registro de clientes
+
+### /clients/edit - Edição de um cliente
+
+Permite a edição dos dados de clientes
+
+## Instalação e configuração
+
+1. Instale as dependências
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Faça a build do projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Execute o projeto
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+npm run start
+```
